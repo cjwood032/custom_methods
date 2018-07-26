@@ -1,0 +1,12 @@
+<h2>Custom Methods App</h2>
+<p><tt>Sign into your account, or sign up if you need one!</p></tt>
+<nav>
+	<% if logged_in? %>
+		<a href="/users/home">Go to the homepage</a>
+		<a href="/logout">Logout</a>
+	<% else %>
+    	<button><a href="/signup">Sign Up</a></button>
+    	<button><a href="/login"> Sign In </a></button>
+  	<%end %>
+
+</nav>

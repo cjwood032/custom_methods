@@ -1,0 +1,6 @@
+<p> <%= @user.username %>'s methods
+<% @user.methods.each do |m| %>
+  <div>
+    <%= m.content %>
+  </div>
+<% end %>
