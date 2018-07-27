@@ -1,5 +1,6 @@
-class Method <ActiveRecord::Base
+class Methods <ActiveRecord::Base
 	belongs_to :user
+	has_many :tags
 	def slug
 		method.downcase.gsub(" ","-")
 	end

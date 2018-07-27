@@ -1,7 +1,7 @@
-<p><b> test</b> 
+<p><b> <%= current_user.username%></b> 
 <button type="button" class="btn btn-outline-secondary"><a href="/logout">Logout</a></button> </p>
 
 <button><a href='PUT IN THE BROWSE METHODS'>Browse Methods</a></button>
 <button><a href='PUT IN THE BROWSE Users'>Browse Users</a> </button><br>
-<button><a href='PUT IN THE NEW METHODS'>Submit a New Method</a></button>
-<button><a href='PUT IN THE USER METHODS'>View/Edit Your Methods</a></button>
+<button><a href='../methods/new'>Submit a New Method</a></button>
+<button><a href='/users/<%= current_user.slug%>'>View/Edit Your Methods</a></button>

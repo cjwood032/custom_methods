@@ -1,4 +1,4 @@
-class TweetsController < ApplicationController
+class MethodsController < ApplicationController
   get '/methods' do
     if logged_in?
       @methods = Methods.all
@@ -22,7 +22,7 @@ class TweetsController < ApplicationController
         redirect to "/methods/new"
       else
         @method = current_user.methods.build(content: params[:content])
-        if @tmethod.save
+        if @method.save
           redirect to "/methods/#{@method.id}"
         else
           redirect to "/methods/new"
