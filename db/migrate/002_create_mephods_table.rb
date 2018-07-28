@@ -1,7 +1,7 @@
 class CreateMephodsTable < ActiveRecord::Migration
   def change
   	create_table :mephods do |t|
-  		t.text :name
+  		t.text :mephodname
   		t.integer :user_id
   		t.text :language
   		t.text :description

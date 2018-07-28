@@ -8,7 +8,11 @@ class UsersController < ApplicationController
 		end
 	end #end of the /signup
 	get '/user_home' do
-		erb :'users/user_home'
+		if !logged_in?
+			erb :'users/login'
+		else
+			erb :'users/user_home'
+		end
 	end
 	post '/signup' do
     	if params[:username] == "" || params[:email] == "" || params[:password] == ""

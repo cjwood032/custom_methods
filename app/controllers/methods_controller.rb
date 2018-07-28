@@ -1,4 +1,5 @@
 class MephodsController < ApplicationController
+require 'pry'
   get '/methods' do
     if logged_in?
       @mephod = Mephod.all
@@ -8,34 +9,21 @@ class MephodsController < ApplicationController
     end
   end
 
-  get '/methods/new' do
-    if logged_in?
-      erb :'methods/new_method'
-    else
-      redirect to '/login'
-    end
-  end
-	post '/methods/new' do
-      		@mephod = Mephod.new(:name => params[:name], :language => params[:language], :description => params[:description], :mephod_data => params[:mephod_data], :tag => params[:tag])
-     		@mephod.save
+	get '/methods/new' do
+    	if logged_in?
+    	  erb :'methods/new_method'
+   		else
+    	  redirect to '/login'
+    	end
+	end
+	post '/create' do
+      		@mephod = Mephod.new(:mephodname => params[:name], :language =>params[:language], :description => params[:description],:mephod_data =>params[:mephod_data])
+      		@mephod.user_id=current_user.id
+      		binding.pry
+      		@mephod.save
      		redirect to '/methods'
- 	end #end post signup
-  post '/methods' do
-    if logged_in?
-      if params[:content] == ""
-        redirect to "/methods/new"
-      else
-        @method = current_user.mephods.build(content: params[:content])
-        if @mephod.save(false)
-          redirect to "/methods/#{@method.id}"
-        else
-          redirect to "/methods/new"
-        end
-      end
-    else
-      redirect to '/login'
-    end
-  end
+ 	end 
+  
 
   get '/methods/:slug' do
     if logged_in?

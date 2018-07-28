@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 3) do
 
   create_table "mephods", force: :cascade do |t|
-    t.text    "name"
+    t.text    "mephodname"
     t.integer "user_id"
     t.text    "language"
     t.text    "description"
