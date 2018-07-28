@@ -19,7 +19,13 @@ require 'pry'
 	post '/create' do
       		@mephod = Mephod.new(:mephodname => params[:name], :language =>params[:language], :description => params[:description],:mephod_data =>params[:mephod_data])
       		@mephod.user_id=current_user.id
-      		binding.pry
+      		@mephod.tag=""
+      		Tag.all.each do |t|
+      			if params[:"#{t.name}"]!=nil
+    	  			@mephod.tag << params[:"#{t.name}"] + " "
+      			end
+      		end
+      		@mephod.tag.strip
       		@mephod.save
      		redirect to '/methods'
  	end 

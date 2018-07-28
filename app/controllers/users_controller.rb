@@ -45,6 +45,8 @@ class UsersController < ApplicationController
   
    get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
+    binding.pry
+    @user_methods= Method.all.collect{|m| m.user_id=@user.id}
     erb :'users/show'
   end
  
