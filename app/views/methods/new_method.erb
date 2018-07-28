@@ -14,11 +14,11 @@
    <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Language</label>
  	 <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
     <option selected>Choose...</option>
-    <option value="1">C</option>
-    <option value="2">Java</option>
-    <option value="3">Perl</option>
-    <option value="4">Python</option>
-    <option value="3">Ruby</option>
+    <option value="C">C</option>
+    <option value="Java">Java</option>
+    <option value="Perl">Perl</option>
+    <option value="Python">Python</option>
+    <option value="Ruby">Ruby</option>
   </select>
   
   <div class="form-group">
@@ -26,15 +26,15 @@
     <textarea class="form-control" id="description" rows="3"></textarea>
   </div>
   <div class="form-group">
-    <label for="description">The method's code</label>
-    <textarea class="form-control" id="method_data" rows="15"></textarea>
+    <label for="mephod_data">The method's code</label>
+    <textarea class="form-control" id="mephod_data" rows="15"></textarea>
   </div>
   <label><h4><center>Tags</center></h4></label><br>
-    <% Tags.all.each do |tag| %>
+    <% Tag.all.each do |tag| %>
       <div class="form-check form-check-inline">
       <label><%= tag.name %></label>
-      <input class="form-check-input" type="checkbox" id="tag_<%=tag.id%>" name="method[tag_ids][]" value="<%= tag.id %>">
+      <input class="form-check-input" type="checkbox" id="tag_<%=tag.id%>" name="mephod[tag_ids][]" value="<%= tag.name %>">
     	</div>
     <% end %>
-	
+	<input class="btn btn-primary" type="submit" value="submit">
 </form>

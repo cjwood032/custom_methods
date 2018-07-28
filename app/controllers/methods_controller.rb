@@ -1,8 +1,8 @@
-class MethodsController < ApplicationController
+class MephodsController < ApplicationController
   get '/methods' do
     if logged_in?
-      @methods = Methods.all
-      erb :'methods/methods'
+      @mephod = Mephod.all
+      erb :'/methods/browse_methods'
     else
       redirect to '/login'
     end
@@ -15,14 +15,18 @@ class MethodsController < ApplicationController
       redirect to '/login'
     end
   end
-
+	post '/methods/new' do
+      		@mephod = Mephod.new(:name => params[:name], :language => params[:language], :description => params[:description], :mephod_data => params[:mephod_data], :tag => params[:tag])
+     		@mephod.save
+     		redirect to '/methods'
+ 	end #end post signup
   post '/methods' do
     if logged_in?
       if params[:content] == ""
         redirect to "/methods/new"
       else
-        @method = current_user.methods.build(content: params[:content])
-        if @method.save
+        @method = current_user.mephods.build(content: params[:content])
+        if @mephod.save(false)
           redirect to "/methods/#{@method.id}"
         else
           redirect to "/methods/new"
@@ -33,9 +37,9 @@ class MethodsController < ApplicationController
     end
   end
 
-  get '/methods/:id' do
+  get '/methods/:slug' do
     if logged_in?
-      @method = Method.find_by_id(params[:id])
+      @mephod = Mephod.find_by_slug(params[:slug])
       erb :'methods/show_method'
     else
       redirect to '/login'
@@ -44,8 +48,8 @@ class MethodsController < ApplicationController
 
   get '/methods/:id/edit' do
     if logged_in?
-      @method = Method.find_by_id(params[:id])
-      if @method && @method.user == current_user
+      @mephod = Mephod.find_by_id(params[:id])
+      if @mephod && @mephod.user == current_user
         erb :'methods/edit_method'
       else
         redirect to '/methods'
@@ -60,12 +64,12 @@ class MethodsController < ApplicationController
       if params[:content] == ""
         redirect to "/methods/#{params[:id]}/edit"
       else
-        @method = Method.find_by_id(params[:id])
-        if @method && @method.user == current_user
-          if @method.update(content: params[:content])
-            redirect to "/methods/#{@method.id}"
+        @mephod = Mephod.find_by_id(params[:id])
+        if @mephod && @mephod.user == current_user
+          if @mephod.update(content: params[:content])
+            redirect to "/methods/#{@mephod.id}"
           else
-            redirect to "/methods/#{@method.id}/edit"
+            redirect to "/methods/#{@mephod.id}/edit"
           end
         else
           redirect to '/methods'
@@ -76,11 +80,13 @@ class MethodsController < ApplicationController
     end
   end
 
+  
+
   delete '/methods/:id/delete' do
     if logged_in?
-      @method = Method.find_by_id(params[:id])
-      if @method && @method.user == current_user
-        @method.delete
+      @mephod = Mephod.find_by_id(params[:id])
+      if @mephod && @mephod.user == current_user
+        @mephod.delete
       end
       redirect to '/methods'
     else

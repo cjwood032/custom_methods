@@ -1,0 +1,18 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+  	  <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+	<tbody>
+			<% Mephod.all.each do |m| %>
+			  <tr>
+        		<th scope="row"><%=m.id%></th>
+        		<td><a href="/methods/<%=m.slug%>"><%=m.name%></a></td>        		
+        		<td><%=m.description%></td>
+        	  </tr>
+	<%end%>
+		</tr>
+	</tbody>

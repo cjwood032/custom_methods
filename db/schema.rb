@@ -13,14 +13,19 @@
 
 ActiveRecord::Schema.define(version: 3) do
 
-  create_table "methodss", force: :cascade do |t|
-    t.text    "content"
+  create_table "mephods", force: :cascade do |t|
+    t.text    "name"
     t.integer "user_id"
+    t.text    "language"
+    t.text    "description"
+    t.text    "mephod_data"
+    t.integer "tag_id"
+    t.text    "tag"
   end
 
   create_table "tags", force: :cascade do |t|
     t.text    "name"
-    t.integer "method_id"
+    t.integer "mephod_id"
   end
 
   create_table "users", force: :cascade do |t|

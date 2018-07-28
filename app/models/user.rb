@@ -1,6 +1,6 @@
 class User <ActiveRecord::Base
 	
-	has_many :methods
+	has_many :mephods
 	has_secure_password
 	
 	def slug
