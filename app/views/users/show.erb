@@ -1,6 +1,6 @@
 <p> <%= @user.username %>'s methods
 <% @user.mephods.each do |m| %>
   <div>
-    <%= m.name %>
+    <a href="/methods/<%=m.slug%>"><%= m.mephodname %></a>
   </div>
 <% end %>

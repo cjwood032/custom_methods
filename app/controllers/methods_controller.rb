@@ -34,16 +34,23 @@ require 'pry'
   get '/methods/:slug' do
     if logged_in?
       @mephod = Mephod.find_by_slug(params[:slug])
+      @user=User.find(@mephod.user_id).username
+      if @user==current_user
+      	editable=true
+      else 
+      	editable=false
+      end
       erb :'methods/show_method'
     else
       redirect to '/login'
     end
   end
 
-  get '/methods/:id/edit' do
+  get '/methods/:slug/edit' do
     if logged_in?
-      @mephod = Mephod.find_by_id(params[:id])
-      if @mephod && @mephod.user == current_user
+      @mephod = Mephod.find_by_slug(params[:slug])
+      @user=User.find(@mephod.user_id)
+      if  @user == current_user
         erb :'methods/edit_method'
       else
         redirect to '/methods'
