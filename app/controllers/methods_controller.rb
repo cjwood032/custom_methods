@@ -81,7 +81,7 @@ require 'pry'
   end
 
  get "/search" do
- 	@st="Search Term"
+ 	@st=""
  	@viewable="invisible"
  	@results=Hash.new(0)
  	erb :'methods/search'
@@ -93,21 +93,28 @@ require 'pry'
   	if params[:inlineRadioOptions]=="Name"
 	  	@results=Mephod.all.select do|m,v|
 	  			check=m.mephodname
-	  			check.include? params[:term] or check.include? params[:term].capitalize	
+	  			if m.mephodname !=nil
+	  				check.include? params[:term] or check.include? params[:term].capitalize
+	  			end
 	  	end
   	end
 
   	if params[:inlineRadioOptions]=="Description"
 	  	@results=Mephod.all.select do|m,v|
 	  			check=m.description
-	  			check.include? params[:term] or check.include? params[:term].capitalize
+	  			if m.description !=nil
+	  				check.include? params[:term] or check.include? params[:term].capitalize
+	  			end
 	  	end
   	end
   	  	
   	if params[:inlineRadioOptions]=="Code"
 	  	@results=Mephod.all.select do|m,v|
 	  			check=m.mephod_data
-	  			check.include? params[:term] or check.include? params[:term].capitalize	
+	  			if m.mephod_data !=nil
+	  				check.include? params[:term] or check.include? params[:term].capitalize
+	  			end
+	
 	  	end
   	end
   	if params[:inlineRadioOptions]=="Language"
