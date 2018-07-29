@@ -1,6 +1,6 @@
 <div class="container-fluid"><h4><center><%= @mephod.mephodname %></center></h4> </div><br>
-<p>Created by: <a href='/users/<%=@user%>'><%=@user%></a> 
-<button type="button" class="btn btn-outline-secondary"><a href="/methods/<%=@mephod.slug%>/edit">Edit</a></button>
+<p>Created by: <a href='/users/<%=@user%>'><%=@user.username%></a> 
+<div class=<%=@editable%> <button> <a href="/methods/<%=@mephod.slug%>/edit">Edit</a> </button></div>
 <p><b>Language: </b><%= @mephod.language %> <br>
 <b>Description:</b> <br>
 <%= @mephod.description %><br><br>

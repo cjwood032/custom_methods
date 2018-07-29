@@ -1,7 +1,25 @@
 <h2> Edit a Method </h2>
 
-<form method="post" action="/methods/<%=@mephod.id%>">
-  <input id="hidden" type="hidden" name="_method" value="PATCH">
-  <input type="text" name="content" value="<%= @mephod.content %>">
-  <input type="submit" value="submit">
+<form action="/edit/<%=@mephod.id%>" method="POST">
+  <div class="form-group">
+    <label for="Method Name:">Rename your method</label><button><a href='/user_home'>Back</a></button>
+    <input type="text" class="form-control" name="name" value="<%=@mephod.mephodname%>">
+  </div>
+     
+  <div class="form-group">
+    <label for="description">Description of the method</label>
+    <textarea class="form-control" type="text" name="description" rows="3" value="<% @mephod.description%>"><%= @mephod.description%></textarea>
+  </div>
+  <div class="form-group">
+    <label for="mephod[mephod_data]">The method's code</label>
+    <textarea class="form-control" name="mephod_data" rows="15" value="<% @mephod.mephod_data%>"><%=@mephod.mephod_data%></textarea>
+  </div>
+  <label><h4><center>Tags</center></h4></label><br>
+    <% Tag.all.each do |tag| %>
+      <div class="form-check form-check-inline">
+      <label><%= tag.name %></label>
+      <input class="form-check-input" type="checkbox" id="tag_<%=tag.id%>" name="<%= tag.name %>" value="<%= tag.name %>">
+    	</div>
+    <% end %>
+	<input type="submit" value="submit">
 </form>

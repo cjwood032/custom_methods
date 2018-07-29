@@ -30,15 +30,31 @@ require 'pry'
      		redirect to '/methods'
  	end 
   
+  post '/edit/:id' do
+  			@mephod= Mephod.find(params[:id])
+      		@mephod.mephodname = params[:name]
+      		@mephod.description = params[:description]
+      		@mephod.mephod_data = params[:mephod_data]
+      		@mephod.user_id=current_user.id
+      		@mephod.tag=""
+      		Tag.all.each do |t|
+      			if params[:"#{t.name}"]!=nil
+    	  			@mephod.tag << params[:"#{t.name}"] + " "
+      			end
+      		end
+      		@mephod.tag.strip
+      		@mephod.save
+     		redirect to '/methods'
+ 	end 
 
   get '/methods/:slug' do
     if logged_in?
       @mephod = Mephod.find_by_slug(params[:slug])
-      @user=User.find(@mephod.user_id).username
+      @user=User.find(@mephod.user_id)
       if @user==current_user
-      	editable=true
+      	@editable="visible"
       else 
-      	editable=false
+      	@editable="invisible"
       end
       erb :'methods/show_method'
     else
