@@ -76,26 +76,7 @@ require 'pry'
     end
   end
 
-  patch '/methods/:id' do
-    if logged_in?
-      if params[:content] == ""
-        redirect to "/methods/#{params[:id]}/edit"
-      else
-        @mephod = Mephod.find_by_id(params[:id])
-        if @mephod && @mephod.user == current_user
-          if @mephod.update(content: params[:content])
-            redirect to "/methods/#{@mephod.id}"
-          else
-            redirect to "/methods/#{@mephod.id}/edit"
-          end
-        else
-          redirect to '/methods'
-        end
-      end
-    else
-      redirect to '/login'
-    end
-  end
+ 
 
   
 
