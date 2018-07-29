@@ -1,0 +1,48 @@
+<h2><center>Search Methods</center></h2>
+
+
+
+
+
+
+
+<form action="/search" method="POST">
+  <div class="form-group">
+    <label for="Method Name:">Search</label>
+    <input type="text" class="form-control" name="term" placeholder="<%= @st%>">
+	</div>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Name">
+	  <label class="form-check-label" for="inlineRadio1">Name</label>
+	</div>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Description">
+	  <label class="form-check-label" for="inlineRadio2">Description</label>
+	</div>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Code">
+	  <label class="form-check-label" for="inlineRadio3">Code</label>
+	</div>
+	<input type="submit" value="submit">
+
+</form>
+<div class=<%=@viewable%>>
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	  	  <th scope="col">#</th>
+	      <th scope="col">Name</th>
+	      <th scope="col">Description</th>
+	    </tr>
+	  </thead>
+		<tbody>
+				<% @results.each do |m| %>
+				  <tr>
+	        		<th scope="row"><%=m.id%></th>
+	        		<td><a href="/methods/<%=m.slug%>"><%=m.mephodname%></a></td>        		
+	        		<td><%=m.description%></td>
+	        	  </tr>
+		<%end%>
+			</tr>
+		</tbody>
+</div>

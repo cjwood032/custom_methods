@@ -76,9 +76,39 @@ require 'pry'
     end
   end
 
- 
+ get "/search" do
+ 	@st="Search Term"
+ 	@viewable="invisible"
+ 	@results=Hash.new(0)
+ 	erb :'methods/search'
+ end
 
-  
+  post '/search' do
+  	@st=params[:term]
+  	@viewable="visible"
+  	if params[:inlineRadioOptions]=="Name"
+	  	@results=Mephod.all.select do|m,v|
+	  			check=m.mephodname
+	  			check.include? params[:term] or check.include? params[:term].capitalize	
+	  	end
+  	end
+
+  	if params[:inlineRadioOptions]=="Description"
+	  	@results=Mephod.all.select do|m,v|
+	  			check=m.description
+	  			check.include? params[:term] or check.include? params[:term].capitalize
+	  	end
+  	end
+  	  	
+  	if params[:inlineRadioOptions]=="Code"
+	  	@results=Mephod.all.select do|m,v|
+	  			check=m.mephod_data
+	  			check.include? params[:term] or check.include? params[:term].capitalize	
+	  	end
+  	end
+  	
+   	erb :'methods/search'
+  end
 
   post '/delete/:id' do
     if logged_in?
