@@ -99,13 +99,13 @@ require 'pry'
 
   
 
-  delete '/methods/:id/delete' do
+  post '/delete/:id' do
     if logged_in?
-      @mephod = Mephod.find_by_id(params[:id])
+      @mephod = Mephod.find(params[:id])
       if @mephod && @mephod.user == current_user
         @mephod.delete
       end
-      redirect to '/methods'
+      erb :'/users/user_home'
     else
       redirect to '/login'
     end
