@@ -17,18 +17,22 @@ require 'pry'
     	end
 	end
 	post '/create' do
-      		@mephod = Mephod.new(:mephodname => params[:name], :language =>params[:language], :description => params[:description],:mephod_data =>params[:mephod_data])
-      		@mephod.user_id=current_user.id
-      		@mephod.tag=""
-      		Tag.all.each do |t|
-      			if params[:"#{t.name}"]!=nil
-    	  			@mephod.tag << params[:"#{t.name}"] + " "
+	    	if params[:mephodname] == "" || params[:mephod_data] == "" || params[:description] == ""|| params[:language]
+	      		redirect to '/methods/new'
+	      	else
+	      		@mephod = Mephod.new(:mephodname => params[:name], :language =>params[:language], :description => params[:description],:mephod_data =>params[:mephod_data])
+    	  		@mephod.user_id=current_user.id
+    	  		@mephod.tag=""
+    	  		Tag.all.each do |t|
+    	  			if params[:"#{t.name}"]!=nil
+    		  			@mephod.tag << params[:"#{t.name}"] + " "
+      				end
       			end
-      		end
-      		@mephod.tag.strip
-      		@mephod.save
-     		redirect to '/methods'
- 	end 
+      			@mephod.tag.strip
+      			@mephod.save
+     			redirect to '/methods'
+ 			end
+ 		end 
   
   post '/edit/:id' do
   			@mephod= Mephod.find(params[:id])
@@ -106,7 +110,14 @@ require 'pry'
 	  			check.include? params[:term] or check.include? params[:term].capitalize	
 	  	end
   	end
-  	
+  	if params[:inlineRadioOptions]=="Language"
+	  	@results=Mephod.all.select do|m,v|
+	  			check=m.language
+	  			if m.language !=nil
+	  				check.include? params[:term] or check.include? params[:term].capitalize
+	  			end
+	  	end
+  	end
    	erb :'methods/search'
   end
 
