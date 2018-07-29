@@ -17,7 +17,8 @@ require 'pry'
     	end
 	end
 	post '/create' do
-	    	if params[:mephodname] == "" || params[:mephod_data] == "" || params[:description] == ""|| params[:language]
+	    	if params[:name] == "" || params[:mephod_data] == "" || params[:description] == ""|| params[:language] ==""
+	    		binding.pry
 	      		redirect to '/methods/new'
 	      	else
 	      		@mephod = Mephod.new(:mephodname => params[:name], :language =>params[:language], :description => params[:description],:mephod_data =>params[:mephod_data])
@@ -32,6 +33,9 @@ require 'pry'
       			@mephod.save
      			redirect to '/methods'
  			end
+      	@mephod.tag.strip
+      	@mephod.save
+     	redirect to '/methods'
  		end 
   
   post '/edit/:id' do
