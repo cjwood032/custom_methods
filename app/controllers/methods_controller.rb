@@ -18,25 +18,25 @@ require 'pry'
 	end
 	post '/create' do
 	    	if params[:name] == "" || params[:mephod_data] == "" || params[:description] == ""|| params[:language] ==""
-	    		binding.pry
-	      		redirect to '/methods/new'
+	    		
+	      		erb :'methods/new_method', locals: {message: "You need to fill out the form completely."}
 	      	else
-	      		@mephod = Mephod.new(:mephodname => params[:name], :language =>params[:language], :description => params[:description],:mephod_data =>params[:mephod_data])
-    	  		@mephod.user_id=current_user.id
-    	  		@mephod.tag=""
-    	  		Tag.all.each do |t|
-    	  			if params[:"#{t.name}"]!=nil
-    		  			@mephod.tag << params[:"#{t.name}"] + " "
-      				end
-      			end
-      			@mephod.tag.strip
-      			@mephod.save
-     			redirect to '/methods'
- 			end
+	      		redirect to '/createmethod'
+	      	end
+	end
+	get '/createmethod' do      	
+		@mephod = current_user.mephods.build(:mephodname => params[:name], :language =>params[:language], :description => params[:description],:mephod_data =>params[:mephod_data])
+		@mephod.tag=""
+  		Tag.all.each do |t|
+  			if params[:"#{t.name}"]!=nil
+	  			@mephod.tag << params[:"#{t.name}"] + " "
+      		end
+      	end
       	@mephod.tag.strip
       	@mephod.save
      	redirect to '/methods'
- 		end 
+ 
+ 	end 
   
   post '/edit/:id' do
   			@mephod= Mephod.find(params[:id])
