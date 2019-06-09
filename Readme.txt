@@ -1,4 +1,4 @@
-Custom Methods App. Contributor: Toph Wood.
+#Custom Methods App. Contributor: Chris Wood.
 Readme:
 The purpose of the app is for users to store custom methods, and to view other users custom methods. Methods are stored in a database, and can be searched for based on their name, description, the code, or language. Users may edit or delete their previously created methods, however they cannot edit or delete the codes created by other users.
 Features:
