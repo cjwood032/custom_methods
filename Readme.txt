@@ -17,7 +17,7 @@ Installation instructions:
 2. Unzip the folder.
 3. Navigate a command line into the main directory
 4. Type 'bundle install' in the CLI and hit enter.
-5. Type 'rack db:migrate' to create the database
+5. Type 'rack db:migrate' to create the database *or* 'bundle exec rake db:migrate'
 5. Type 'shotgun' in the CLI and hit enter.
 6. Navigate a web browser to the listed IP.
 7. The database is up and running!
